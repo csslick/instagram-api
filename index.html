@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Instagram API</title>
+</head>
+<body>
+
+<script>
+
+  // 인스타그램 URL
+  const url = 'https://www.instagram.com/'
+  // Post URL
+  const post_url = [
+    'p/B_x2lVrD2g_',	
+    'p/B--L2eUDi_G',
+    'p/B_5nGVqDwcw'
+  ]
+
+  // get media from instagram
+  const get_insta_img = function(postUrl){
+    const res = fetch(url + postUrl + '/media/?size=t')
+        .then(res => res.blob())
+        .then(data => {
+          console.log(data)
+          img = URL.createObjectURL(data);
+          document.body.innerHTML += `<img src=${img} /> `;
+        })
+        .catch(err => console.log(err));
+  }
+
+  post_url.forEach(function(post){
+    get_insta_img(post);
+  })
+
+</script>
+</body>
+</html>
